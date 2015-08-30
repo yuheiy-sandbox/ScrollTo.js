@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>Test page for scrollTo.js</title>
+    <style>
+      body {
+        width: 600px;
+      }
+      #to-top {
+        position: fixed;
+        right: 50px;
+        bottom: 50px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Test page for scrollTo.js</h1>
+
+    <a id="to-top" href="#top">GoToTop</a>
+
+    <section id="section">
+      <h1>Lorem ipsum dolor sit amet, consectetur.</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate possimus harum odio, facere totam nemo quos, eveniet optio, nostrum maxime minus. Dolorem perspiciatis accusantium voluptatem perferendis accusamus? Quam incidunt, vero illum impedit, provident quisquam nobis quo adipisci exercitationem pariatur eum eos odio voluptatem dolor enim rem modi, vitae error numquam autem perferendis sed atque. Excepturi, libero? Omnis molestiae eveniet in aperiam architecto nihil commodi, mollitia ipsam temporibus iusto beatae voluptates quo, velit obcaecati suscipit magnam numquam. Labore distinctio atque nostrum vitae, aut eaque minus dignissimos accusamus porro. Aspernatur natus asperiores ex quas error, quo quasi. Modi ullam tempore dolore eveniet.</p>
+    </section>
+
+    <script src="scrollTo.js"></script>
+    <script>
+      var section = document.getElementById('section');
+      for (var i = 0; i < 10; i++) {
+        var clone = section.cloneNode(true);
+        document.body.appendChild(clone);
+      }
+
+      var flag = true;
+
+      document.getElementById('to-top').addEventListener('click', function (e) {
+        e.preventDefault();
+        if (!flag) return;
+        flag = false;
+
+        scrollTo(1000, 800, 'easeInOutElastic', function () {
+          flag = true;
+        });
+      });
+    </script>
+  </body>
+</html>
