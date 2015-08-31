@@ -86,9 +86,11 @@
 
   Object.keys(baseEasings).forEach(function (name) {
     easings['easeIn' + name] = baseEasings[name];
+
     easings['easeOut' + name] = function (p) {
       return 1 - baseEasings[name](1 - p);
     };
+
     easings['easeInOut' + name] = function (p) {
       return p < 0.5 ? baseEasings[name](p * 2) / 2 : 1 - baseEasings[name](p * -2 + 2) / 2;
     };

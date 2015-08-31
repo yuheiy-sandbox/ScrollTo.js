@@ -67,17 +67,20 @@
   baseEasings.Back =
     p => p * p * (3 * p - 2);
 
-  baseEasings.Bounce = p => {
-    let pow2;
-    let bounce = 4;
-    while (p < ((pow2 = Math.pow(2, --bounce)) - 1) / 11) {}
-    return 1 / Math.pow(4, 3 - bounce) - 7.5625 * Math.pow((pow2 * 3 - 2) / 22 - p, 2);
-  };
+  baseEasings.Bounce =
+    p => {
+      let pow2;
+      let bounce = 4;
+      while (p < ((pow2 = Math.pow(2, --bounce)) - 1) / 11) {}
+      return 1 / Math.pow(4, 3 - bounce) - 7.5625 * Math.pow((pow2 * 3 - 2) / 22 - p, 2);
+    };
 
   Object.keys(baseEasings).forEach(name => {
     easings['easeIn' + name] = baseEasings[name];
+
     easings['easeOut' + name] =
       p => 1 - baseEasings[name](1 - p);
+
     easings['easeInOut' + name] =
       p => p < 0.5 ? baseEasings[name](p * 2) / 2 : 1 - baseEasings[name](p * -2 + 2) / 2;
   });
