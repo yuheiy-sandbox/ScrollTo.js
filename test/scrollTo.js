@@ -22,20 +22,19 @@
     var fps = 13;
     var from = window.pageYOffset;
     var diff = from - target;
-    var offset = from;
     var elapsedTime = 0;
 
     var tick = function tick() {
       if (elapsedTime >= duration) {
-        offset = target;
-        document.documentElement.scrollTop = document.body.scrollTop = offset;
+        var _offset = target;
+        document.documentElement.scrollTop = document.body.scrollTop = _offset;
         if (callback) callback();
         return;
       }
 
       var elapsedTimeRate = elapsedTime / duration;
       var valueChangeRate = easings[easing](elapsedTimeRate);
-      offset = from - diff * valueChangeRate;
+      var offset = from - diff * valueChangeRate;
       document.documentElement.scrollTop = document.body.scrollTop = offset;
       elapsedTime += fps;
       setTimeout(tick, fps);

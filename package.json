@@ -1,7 +1,7 @@
 {
   "name": "scrolltojs",
   "version": "0.1.0",
-  "description": "This library supports only smoothly scrolling.",
+  "description": "A JavaScript library supports only smoothly scrolling.",
   "scripts": {
     "start": "babel --blacklist strict src/scrollTo.js -w -o test/scrollTo.js -s",
     "build": "babel --blacklist strict src/scrollTo.js -o scrollTo.js && uglifyjs scrollTo.js -c -m --comments '/\\/*!/' -o scrollTo.min.js"
