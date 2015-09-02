@@ -18,8 +18,8 @@
     }
 
     const fps = 13;
-    const from = window.pageYOffset;
-    const diff = from - target;
+    const start = window.pageYOffset;
+    const valueInChange = start - target;
     let elapsedTime = 0;
 
     const tick = () => {
@@ -32,7 +32,7 @@
 
       const elapsedTimeRate = elapsedTime / duration;
       const valueChangeRate = easings[easing](elapsedTimeRate);
-      const offset = from - (diff * valueChangeRate);
+      const offset = start - (valueInChange * valueChangeRate);
       document.documentElement.scrollTop = document.body.scrollTop = offset;
       elapsedTime += fps;
       setTimeout(tick, fps);
@@ -40,7 +40,7 @@
     tick();
   };
 
-  let easings = {
+  const easings = {
     linear:
       p => p,
     swing:
@@ -49,7 +49,7 @@
 
   // Special Easings
 
-  let baseEasings = {};
+  const baseEasings = {};
 
   ['Quad', 'Cubic', 'Quart', 'Quint', 'Expo'].forEach((name, i) => baseEasings[name] =
     p => Math.pow(p, i + 2));

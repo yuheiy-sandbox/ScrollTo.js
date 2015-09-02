@@ -20,8 +20,8 @@
     }
 
     var fps = 13;
-    var from = window.pageYOffset;
-    var diff = from - target;
+    var start = window.pageYOffset;
+    var valueInChange = start - target;
     var elapsedTime = 0;
 
     var tick = function tick() {
@@ -34,7 +34,7 @@
 
       var elapsedTimeRate = elapsedTime / duration;
       var valueChangeRate = easings[easing](elapsedTimeRate);
-      var offset = from - diff * valueChangeRate;
+      var offset = start - valueInChange * valueChangeRate;
       document.documentElement.scrollTop = document.body.scrollTop = offset;
       elapsedTime += fps;
       setTimeout(tick, fps);
