@@ -33,16 +33,20 @@
         document.body.appendChild(clone);
       }
 
+
       var flag = true;
+      var target = 1000;
 
       document.getElementById('to-top').addEventListener('click', function (e) {
-        e.preventDefault();
-        if (!flag) return;
-        flag = false;
+        var scrollTop = window.pageYOffset;
 
-        scrollTo(1000, 800, 'easeInOutElastic', function () {
+        e.preventDefault();
+        if (!flag || scrollTop === target) return;
+
+        scrollTo(target, 1000, 'easeInOutBounce', function () {
           flag = true;
         });
+        flag = false;
       });
     </script>
   </body>

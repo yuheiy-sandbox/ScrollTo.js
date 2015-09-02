@@ -24,5 +24,4 @@ A string indicating which easing function to use for the transition.
 Type: Function()  
 A function to call once the animation is complete.
 
-This library corresponds to [an easing name of jQuery UI](https://jqueryui.com/easing/).  
-When you designate that, so it's possible to use it.
+This library corresponds to [an easing name of jQuery UI](https://jqueryui.com/easing/).When you designate that, so it's possible to use it.

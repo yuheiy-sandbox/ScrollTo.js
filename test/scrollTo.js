@@ -26,8 +26,7 @@
 
     var tick = function tick() {
       if (elapsedTime >= duration) {
-        var _offset = target;
-        document.documentElement.scrollTop = document.body.scrollTop = _offset;
+        document.documentElement.scrollTop = document.body.scrollTop = target;
         if (callback) callback();
         return;
       }
