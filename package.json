@@ -1,5 +1,5 @@
 {
-  "name": "scroll-to",
+  "name": "@yuheiy/scroll-to",
   "version": "0.2.0",
   "description": "A JavaScript library supports only smoothly scrolling.",
   "main": "lib/scrollTo.js",
