@@ -1,15 +1,16 @@
 {
-  "name": "scrolltojs",
-  "version": "0.1.0",
+  "name": "scroll-to",
+  "version": "0.2.0",
   "description": "A JavaScript library supports only smoothly scrolling.",
+  "main": "lib/scrollTo.js",
   "scripts": {
-    "start": "babel --blacklist strict src/scrollTo.js -w -o test/scrollTo.js -s",
-    "build": "babel --blacklist strict src/scrollTo.js -o scrollTo.js && uglifyjs scrollTo.js -c -m --comments '/\\/*!/' -o scrollTo.min.js"
+    "start": "babel --blacklist strict src/scrollTo.js -wo test/scrollTo.js -s",
+    "build": "babel --blacklist strict src/scrollTo.js -o lib/scrollTo.js && uglifyjs lib/scrollTo.js -cm --comments -o lib/scrollTo.min.js"
   },
-  "author": "yuhei",
+  "author": "Yuhei Yasuda",
   "license": "MIT",
   "devDependencies": {
     "babel": "^5.8.23",
-    "uglifyjs": "^2.4.10"
+    "uglify-js": "^2.5.0"
   }
 }

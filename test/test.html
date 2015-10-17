@@ -20,33 +20,25 @@
 
     <a id="to-top" href="#top">GoToTop</a>
 
-    <section id="section">
+    <section class="section">
       <h1>Lorem ipsum dolor sit amet, consectetur.</h1>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate possimus harum odio, facere totam nemo quos, eveniet optio, nostrum maxime minus. Dolorem perspiciatis accusantium voluptatem perferendis accusamus? Quam incidunt, vero illum impedit, provident quisquam nobis quo adipisci exercitationem pariatur eum eos odio voluptatem dolor enim rem modi, vitae error numquam autem perferendis sed atque. Excepturi, libero? Omnis molestiae eveniet in aperiam architecto nihil commodi, mollitia ipsam temporibus iusto beatae voluptates quo, velit obcaecati suscipit magnam numquam. Labore distinctio atque nostrum vitae, aut eaque minus dignissimos accusamus porro. Aspernatur natus asperiores ex quas error, quo quasi. Modi ullam tempore dolore eveniet.</p>
     </section>
 
     <script src="scrollTo.js"></script>
     <script>
-      var section = document.getElementById('section');
+      var section = document.querySelector('.section');
       for (var i = 0; i < 10; i++) {
         var clone = section.cloneNode(true);
         document.body.appendChild(clone);
       }
 
-
-      var flag = true;
-      var target = 1000;
-
       document.getElementById('to-top').addEventListener('click', function (e) {
-        var scrollTop = window.pageYOffset;
-
         e.preventDefault();
-        if (!flag || scrollTop === target) return;
 
-        scrollTo(target, 1000, 'easeInOutBounce', function () {
-          flag = true;
+        ScrollTo({y: 200, duration: 300, easing: 'easeOutBounce'}, function () {
+          console.log('Scrolling has ended');
         });
-        flag = false;
       });
     </script>
   </body>

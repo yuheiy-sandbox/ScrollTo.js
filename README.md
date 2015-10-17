@@ -1,27 +1,25 @@
 # ScrollTo.js
 A JavaScript library supports only smoothly scrolling.
 
+    $ npm i @yuheiy/scroll-to
+
 ## Usage
-    <script src="scrollTo.min.js"></script>
-    <script>
-      scrollTo(0, 200, 'linear', function () {
+    var ScrollTo = require('@yuheiy/scroll-to');
+
+    document.querySelector('.to-top').addEventListener('click', function () {
+      ScrollTo({y: 0, duration: 600, easing: 'easeInOutQuart'}, function () {
         console.log('Scrolling has ended');
       });
-    </script>
+    });
 
 ## Details
-    scrollTo([target][, duration][, easing][, callback])
-* **target**  
-Type: Number  
-A number of scroll position that the animation will move toward.
-* **duration**  
-Type: Number  
-A number determing how long the animation will run.
-* **easing**  
-Type: String  
-A string indicating which easing function to use for the transition.
-* **callback**  
-Type: Function()  
-A function to call once the animation is complete.
+### ScrollTo(options, callback)
+* `options` is an object
+  - `x` (optional) is offset position (default: window.pageXOffset)
+  - `y` (optional) is offset position (default: window.pageYOffset)
+  - `duration` (optional) is milliseconds (default: `800`)
+  - `easing` (optional) is the [animation type](#animation-type) (default: `swing`)
+* `callback` (optional) is the completion callback
 
-This library corresponds to [an easing name of jQuery UI](https://jqueryui.com/easing/). When you designate that, so it's possible to use it.
+### Animation Type
+It's same as [easings of jQuery UI](https://jqueryui.com/easing/)

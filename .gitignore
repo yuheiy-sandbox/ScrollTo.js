@@ -1,0 +1,10 @@
+# meta data
+.DS_Store
+
+# for dev
+node_modules/
+test/scrollTo.js
+test/scrollTo.js.map
+
+# assets
+lib/

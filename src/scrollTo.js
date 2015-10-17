@@ -1,44 +1,21 @@
-/*! ScrollTo.js - v.0.1.0 */
+/**
+ * @preserve ScrollTo.js v.0.1.0
+ *
+ * https://github.com/yuheiy/ScrollTo.js
+ */
 ;(function () {
   'use strict';
 
-  const scrollTo = (target, duration, easing, callback) => {
-    callback = [target, duration, easing, callback].filter(arg => typeof arg === 'function')[0];
-
-    if (!target || typeof target !== 'number') {
-      target = 0;
+  /** Not deep object clone */
+  const clone = o => {
+    const newO = {};
+    for (let prop in o) {
+      newO[prop] = o[prop];
     }
-
-    if (!duration || typeof duration !== 'number') {
-      duration = 400;
-    }
-
-    if (!easing || typeof easing !== 'string') {
-      easing = 'swing';
-    }
-
-    const fps = 13;
-    const start = window.pageYOffset;
-    const valueInChange = start - target;
-    let elapsedTime = 0;
-
-    const tick = () => {
-      if (elapsedTime >= duration) {
-        document.documentElement.scrollTop = document.body.scrollTop = target;
-        if (callback) callback();
-        return;
-      }
-
-      const elapsedTimeRate = elapsedTime / duration;
-      const valueChangeRate = easings[easing](elapsedTimeRate);
-      const offset = start - (valueInChange * valueChangeRate);
-      document.documentElement.scrollTop = document.body.scrollTop = offset;
-      elapsedTime += fps;
-      setTimeout(tick, fps);
-    };
-    tick();
+    return newO;
   };
 
+  /** Normal easings */
   const easings = {
     linear:
       p => p,
@@ -46,8 +23,7 @@
       p => 0.5 - Math.cos(p * Math.PI) / 2
   };
 
-  // Special Easings
-
+  /** Special Easings */
   const baseEasings = {};
 
   ['Quad', 'Cubic', 'Quart', 'Quint', 'Expo'].forEach((name, i) => baseEasings[name] =
@@ -84,5 +60,87 @@
       p => p < 0.5 ? baseEasings[name](p * 2) / 2 : 1 - baseEasings[name](p * -2 + 2) / 2;
   });
 
-  window.scrollTo = scrollTo;
+  /** Main function */
+  const ScrollTo = (options = {}, callback = function () {}) => {
+    if (typeof options !== 'object') {
+      console.error('The first argument must be an object.');
+      return;
+    }
+    options = clone(options);
+
+    if (typeof options.x === 'undefined') {
+      options.x = window.pageXOffset;
+    } else if (typeof options.x !== 'number') {
+      console.error('Options.x must be a number.');
+      return;
+    }
+
+    if (typeof options.y === 'undefined') {
+      options.y = window.pageYOffset;
+    } else if (typeof options.y !== 'number') {
+      console.error('Options.y must be a number.');
+      return;
+    }
+
+    if (typeof options.duration === 'undefined') {
+      options.duration = 800;
+    } else if (typeof options.duration !== 'number') {
+      console.error('Options.duration must be a number.');
+      return;
+    }
+
+    if (typeof options.easing === 'undefined') {
+      options.easing = 'swing';
+    } else if (Object.keys(easings).indexOf(options.easing) === -1) {
+      console.error('Specified easing is undefined');
+      return;
+    }
+
+    if (typeof callback !== 'function') {
+      console.error('Callback is not function');
+      return;
+    }
+
+    const fps = 13;
+    const from = {
+      x: window.pageXOffset,
+      y: window.pageYOffset
+    };
+    const valueInChange = {
+      x: from.x - options.x,
+      y: from.y - options.y
+    };
+    let elapsedTime = 0;
+
+    if (options.x === from.x && options.y === from.y) {
+      return;
+    }
+
+    const tick = () => {
+      if (elapsedTime >= options.duration) {
+        window.scrollTo(options.x, options.y);
+        callback();
+        return;
+      }
+
+      const elapsedTimeRate = elapsedTime / options.duration;
+      const valueChangeRate = easings[options.easing](elapsedTimeRate);
+      const offset = {
+        x: from.x - valueInChange.x * valueChangeRate,
+        y: from.y - valueInChange.y * valueChangeRate
+      };
+
+      window.scrollTo(offset.x, offset.y);
+      elapsedTime += fps;
+      setTimeout(tick, fps);
+    };
+    tick();
+  };
+
+  /** Export function */
+  if (typeof module === 'object' && typeof module.exports === 'object') {
+    module.exports = ScrollTo;
+  } else {
+    window.ScrollTo = ScrollTo;
+  }
 })();
