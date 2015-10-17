@@ -18,7 +18,7 @@ A JavaScript library supports only smoothly scrolling.
   - `x` (optional) is offset position (default: window.pageXOffset)
   - `y` (optional) is offset position (default: window.pageYOffset)
   - `duration` (optional) is milliseconds (default: `800`)
-  - `easing` (optional) is the [animation type](#animation-type) (default: `swing`)
+  - `easing` (optional) is the [animation type](#Animation-Type) (default: `swing`)
 * `callback` (optional) is the completion callback
 
 ### Animation Type

@@ -7,6 +7,10 @@
     "start": "babel --blacklist strict src/scrollTo.js -wo test/scrollTo.js -s",
     "build": "babel --blacklist strict src/scrollTo.js -o lib/scrollTo.js && uglifyjs lib/scrollTo.js -cm --comments -o lib/scrollTo.min.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yuheiy/ScrollTo.js.git"
+  },
   "author": "Yuhei Yasuda",
   "license": "MIT",
   "devDependencies": {
