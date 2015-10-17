@@ -1,5 +1,5 @@
 /**
- * @preserve ScrollTo.js v.0.2.0
+ * @preserve ScrollTo.js v.0.2.1
  *
  * https://github.com/yuheiy/ScrollTo.js
  */
